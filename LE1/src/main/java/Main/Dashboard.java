@@ -75,15 +75,13 @@ public class Dashboard extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         //Patient_List into patientTable
         for (Person person : PersonList) {
-            String ID = person.getID();
-            String LName = person.getLName();
-            String FName = person.getFName();
-            String MName = person.getMName();
+            int ID = person.getID();
+            String CompleteName = person.getCName();
             String Address = person.getAddress();
             String Age = person.getAge();
             String Sex = person.getSex();
             
-            model.addRow(new Object[]{ID, LName, FName, MName, Address, Age, Sex});
+            model.addRow(new Object[]{String.format("%06d", ID), CompleteName, Address, Age, Sex});
         }
     }
 
@@ -129,22 +127,21 @@ public class Dashboard extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         L1Dashboard = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
+        jTabbedPane2 = new javax.swing.JTabbedPane();
+        jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton7 = new javax.swing.JButton();
+        jButton21 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         L2Vaccines = new javax.swing.JPanel();
         jButton12 = new javax.swing.JButton();
@@ -232,8 +229,8 @@ public class Dashboard extends javax.swing.JFrame {
         L0LoginPage.add(ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 240, 230, 30));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setText("Password:");
-        L0LoginPage.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, 80, -1));
+        jLabel5.setText("Authentication Passcode:");
+        L0LoginPage.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, 180, -1));
 
         Password.setText("admin1");
         Password.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -265,35 +262,20 @@ public class Dashboard extends javax.swing.JFrame {
         L1Dashboard.setPreferredSize(new java.awt.Dimension(860, 510));
         L1Dashboard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 310, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 290, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 109, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Statistics", jPanel1);
+        jTabbedPane2.addTab("Statistics", jPanel3);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 310, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jTabbedPane1))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 140, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING))
-        );
-
-        L1Dashboard.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 36, 310, 140));
+        L1Dashboard.add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 30, 290, 140));
 
         jButton1.setBackground(new java.awt.Color(242, 242, 242));
         jButton1.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
@@ -359,6 +341,7 @@ public class Dashboard extends javax.swing.JFrame {
         });
         L1Dashboard.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 140, 40));
 
+        jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Resources\\icons8-update-16.png")); // NOI18N
         jButton5.setText("Update");
         jButton5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton5.setContentAreaFilled(false);
@@ -368,7 +351,7 @@ public class Dashboard extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        L1Dashboard.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 210, 50, 20));
+        L1Dashboard.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 270, 70, 20));
 
         jButton6.setText("Remove");
         jButton6.setBorder(null);
@@ -381,10 +364,6 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
         L1Dashboard.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 210, -1, 20));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gianne Bacay\\Downloads\\icons8-edit-16 (1).png")); // NOI18N
-        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        L1Dashboard.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 210, 30, 20));
 
         jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Resources\\icons8-remove-16.png")); // NOI18N
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -400,7 +379,7 @@ public class Dashboard extends javax.swing.JFrame {
         });
         L1Dashboard.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 210, 160, 20));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Last Name", "First Name", "Middle Name", "Address", "Age", "Sex" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Name", "Address", "Age", "Sex" }));
         jComboBox1.setBorder(null);
         jComboBox1.setName(""); // NOI18N
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -417,13 +396,27 @@ public class Dashboard extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Last Name", "First Name", "Middle Name", "Address", "Age", "Sex"
+                "ID", "Name", "Address", "Age", "Sex"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTable1.setSelectionBackground(new java.awt.Color(255, 153, 51));
+        jTable1.getTableHeader().setReorderingAllowed(false);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
-        L1Dashboard.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, 560, 200));
+        L1Dashboard.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, 560, 190));
 
         jButton7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Resources\\icons8-back-21.png")); // NOI18N
         jButton7.setBorderPainted(false);
@@ -435,7 +428,21 @@ public class Dashboard extends javax.swing.JFrame {
         });
         L1Dashboard.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Resources\\Dashboard (7).png")); // NOI18N
+        jButton21.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Resources\\icons8-add-16 (2).png")); // NOI18N
+        jButton21.setText("Add");
+        jButton21.setAlignmentY(0.0F);
+        jButton21.setBorderPainted(false);
+        jButton21.setContentAreaFilled(false);
+        jButton21.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jButton21.setIconTextGap(3);
+        jButton21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton21ActionPerformed(evt);
+            }
+        });
+        L1Dashboard.add(jButton21, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 210, 80, 20));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Resources\\Dashboard (9).png")); // NOI18N
         L1Dashboard.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 510));
 
         jLayeredPane2.setLayer(L1Dashboard, javax.swing.JLayeredPane.POPUP_LAYER);
@@ -946,6 +953,17 @@ public class Dashboard extends javax.swing.JFrame {
         L4Register.setVisible(true);
     }//GEN-LAST:event_jButton20ActionPerformed
 
+    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        String prevID = (String) model.getValueAt(model.getRowCount()-1, 0);
+        model.addRow(new Object[]{String.format("%06d", Integer.parseInt(prevID) +01)});
+    }//GEN-LAST:event_jButton21ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -985,6 +1003,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton20;
+    private javax.swing.JButton jButton21;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -996,7 +1015,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1005,11 +1023,10 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLayeredPane jLayeredPane2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPane2;
     private static javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables

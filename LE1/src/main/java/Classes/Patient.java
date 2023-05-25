@@ -19,7 +19,7 @@ public class Patient extends Person{
         this.vaccineName = "";
     }
     
-    Patient(String ID, String LName, String FName, String MName, String Address, String Age, String Sex, String Height, String Weight, String vaccineStatus, String vaccineName) {
+    Patient(int ID, String LName, String FName, String MName, String Address, String Age, String Sex, String Height, String Weight, String vaccineStatus, String vaccineName) {
         super(ID, LName, FName, MName, Address, Age, Sex);
         this.Height = Height;
         this.Weight = Weight;

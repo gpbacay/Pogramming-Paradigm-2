@@ -43,7 +43,7 @@ public class CRUD_Main {
             String Weight = Line[7];
             String vaccineStatus = Line[8];
             String vaccineName = Line[9];
-            Patient patient = new Patient(ID, LName, FName, MName, Address, Age, Sex, Height, Weight, vaccineStatus, vaccineName);
+            Patient patient = new Patient(Integer.parseInt(ID), LName, FName, MName, Address, Age, Sex, Height, Weight, vaccineStatus, vaccineName);
             PatientList.add(patient);
          }
       } 
@@ -64,7 +64,7 @@ public class CRUD_Main {
             String Address = Line[4];
             String Age = Line[5];
             String Sex = Line[6];
-            Person person = new Person(ID, LName, FName, MName, Address, Age, Sex);
+            Person person = new Person(Integer.parseInt(ID), LName, FName, MName, Address, Age, Sex);
             PersonList.add(person);
          }
       } 

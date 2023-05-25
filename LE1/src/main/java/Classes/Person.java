@@ -9,10 +9,11 @@ package Classes;
  * @author Gianne Bacay
  */
 public class Person {
-    private String ID, LName, FName, MName, Address, Age, Sex;
+    private int ID;
+    private String LName, FName, MName, Address, Age, Sex;
    
     public Person() {
-        this.ID = "";
+        this.ID = 000000;
         this.LName = "";
         this.FName = "";
         this.MName = "";
@@ -21,7 +22,7 @@ public class Person {
         this.Sex = "";
     }
    
-    public Person(String ID, String LName, String FName, String MName, String Address, String Age, String Sex) {
+    public Person(int ID, String LName, String FName, String MName, String Address, String Age, String Sex) {
         this.ID = ID;
         this.LName = LName;
         this.FName = FName;
@@ -32,7 +33,7 @@ public class Person {
     }
    
     //Setters
-    public void setID(String ID) {
+    public void setID(int ID) {
         this.ID = ID;
     }
     public void setLName(String LName) {
@@ -55,7 +56,7 @@ public class Person {
     }
 
     //Getters
-    public String getID() {
+    public int getID() {
         return ID;
     }
     public String getLName() {
@@ -75,10 +76,9 @@ public class Person {
     public String getSex() {
         return Sex;
     }
-
-    @Override
-    public String toString() {
-       String CName = FName + ", " + LName + " " + MName;
+    
+    public String getCName() {
+       String CName = LName + ", " + FName + " " + MName;
        return CName;
     }
 }
