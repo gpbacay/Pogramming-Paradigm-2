@@ -9,58 +9,87 @@ package Classes;
  * @author Gianne Bacay
  */
 public class Patient extends Person{
-    private String Height, Weight, vaccineStatus, vaccineName;
+    private String VaccineName, VaccineType, DateGiven, AdministeredBy, NextDoseDate, Allergies, Reactions;
     
     public Patient() {
         super();
-        this.Height = "";
-        this.Weight = "";
-        this.vaccineStatus = "";
-        this.vaccineName = "";
+        this.VaccineName = "";
+        this.VaccineType = "";
+        this.DateGiven = "";
+        this.AdministeredBy = "";
+        this.NextDoseDate = "";
+        this.Allergies = "";
+        this.Reactions = "";
     }
     
-    Patient(int ID, String LName, String FName, String MName, String Address, String Age, String Sex, String Height, String Weight, String vaccineStatus, String vaccineName) {
-        super(ID, LName, FName, MName, Address, Age, Sex);
-        this.Height = Height;
-        this.Weight = Weight;
-        this.vaccineStatus = vaccineStatus;
-        this.vaccineName = vaccineName;
+    public Patient(int ID, String Name, String Address, String Age, String Sex, String VaccineName, String VaccineType, String DateGiven, String AdministeredBy, String NextDoseDate, String Allergies, String Reactions) {
+        super(ID, Name, Address, Age, Sex);
+        this.VaccineName = VaccineName;
+        this.VaccineType = VaccineType;
+        this.DateGiven = DateGiven;
+        this.AdministeredBy = AdministeredBy;
+        this.NextDoseDate = NextDoseDate;
+        this.Allergies = Allergies;
+        this.Reactions = Reactions;
     }
-    
+
     //Setters
-    public void setHeight(String Height) {
-        this.Height = Height;
+    public void setVaccineName(String VaccineName) {
+        this.VaccineName = VaccineName;
     }
 
-    public void setWeight(String Weight) {
-        this.Weight = Weight;
+    public void setVaccineType(String VaccineType) {
+        this.VaccineType = VaccineType;
     }
 
-    public void setVaccineStatus(String vaccineStatus) {
-        this.vaccineStatus = vaccineStatus;
+    public void setDateGiven(String DateGiven) {
+        this.DateGiven = DateGiven;
     }
 
-    public void setVaccineName(String vaccineName) {
-        this.vaccineName = vaccineName;
+    public void setAdministeredBy(String AdministeredBy) {
+        this.AdministeredBy = AdministeredBy;
     }
+
+    public void setNextDoseDate(String NextDoseDate) {
+        this.NextDoseDate = NextDoseDate;
+    }
+    
+    public void setAllergies(String Allergies) {
+        this.Allergies = Allergies;
+    }
+    
+    public void setReactions(String Reactions) {
+        this.Reactions = Reactions;
+    }
+    
     
     //Getters
 
-    public String getHeight() {
-        return Height;
-    }
-
-    public String getWeight() {
-        return Weight;
-    }
-
-    public String getVaccineStatus() {
-        return vaccineStatus;
-    }
-
     public String getVaccineName() {
-        return vaccineName;
+        return VaccineName;
+    }
+
+    public String getVaccineType() {
+        return VaccineType;
+    }
+
+    public String getDateGiven() {
+        return DateGiven;
+    }
+
+    public String getAdministeredBy() {
+        return AdministeredBy;
+    }
+
+    public String getNextDoseDate() {
+        return NextDoseDate;
     }
     
+    public String getAllergies() {
+        return Allergies;
+    }
     
+    public String getReactions() {
+        return Reactions;
+    }
 }

@@ -10,23 +10,19 @@ package Classes;
  */
 public class Person {
     private int ID;
-    private String LName, FName, MName, Address, Age, Sex;
+    private String Name, Address, Age, Sex;
    
     public Person() {
         this.ID = 000000;
-        this.LName = "";
-        this.FName = "";
-        this.MName = "";
+        this.Name = "";
         this.Address = "";
         this.Age = "";
         this.Sex = "";
     }
    
-    public Person(int ID, String LName, String FName, String MName, String Address, String Age, String Sex) {
+    public Person(int ID, String Name, String Address, String Age, String Sex) {
         this.ID = ID;
-        this.LName = LName;
-        this.FName = FName;
-        this.MName = MName;
+        this.Name = Name;
         this.Address = Address;
         this.Age = Age;
         this.Sex = Sex;
@@ -36,14 +32,8 @@ public class Person {
     public void setID(int ID) {
         this.ID = ID;
     }
-    public void setLName(String LName) {
-       this.LName = LName;
-    }
-    public void setFName(String FName) {
-       this.FName = FName;
-    }
-    public void setMName(String MName) {
-       this.MName = MName;
+    public void setName(String Name) {
+       this.Name = Name;
     }
     public void setAddress(String Address) {
        this.Address = Address;
@@ -59,13 +49,8 @@ public class Person {
     public int getID() {
         return ID;
     }
-    public String getLName() {
-       return LName;
-    }
-    public String getFName() {
-       return FName;
-    }public String getMName() {
-       return MName;
+    public String getName() {
+       return Name;
     }
     public String getAddress() {
        return Address;
@@ -75,10 +60,5 @@ public class Person {
     }
     public String getSex() {
         return Sex;
-    }
-    
-    public String getCName() {
-       String CName = LName + ", " + FName + " " + MName;
-       return CName;
     }
 }

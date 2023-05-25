@@ -8,7 +8,9 @@ import Classes.Account;
 import Classes.CRUD_Account;
 import static Classes.CRUD_Account.AccountList;
 import Classes.CRUD_Main;
+import static Classes.CRUD_Main.PatientList;
 import static Classes.CRUD_Main.PersonList;
+import Classes.Patient;
 import Classes.Person;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -38,8 +40,10 @@ public class Dashboard extends javax.swing.JFrame {
         L4Register.setVisible(false);
         
         CRUD_Account.Populate_Database();
-        CRUD_Main.Populate_Database1();
-        Populate_Table1();
+        CRUD_Main.PopulateDatabase();
+        PopulateTable();
+        
+        jComboBox1.setSelectedIndex(0);
         
         //Table Sorter
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(jTable1.getModel());
@@ -71,37 +75,38 @@ public class Dashboard extends javax.swing.JFrame {
     }
     
     //Populate Table
-    public static void Populate_Table1() {
+    public static void PopulateTable() {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        //Patient_List into patientTable
+        for (Patient patient : PatientList) {
+            int ID = patient.getID();
+            String Name = patient.getName();
+            String Address = patient.getAddress();
+            String Age = patient.getAge();
+            String Sex = patient.getSex();
+            String VaccineName = patient.getVaccineName();
+            String VaccineType = patient.getVaccineType();
+            String DateGiven = patient.getDateGiven();
+            String AdministeredBy = patient.getAdministeredBy();
+            String NextDoseDate = patient.getNextDoseDate();
+            String Allergies = patient.getAllergies();
+            String Reactions = patient.getReactions();
+                
+            model.addRow(new Object[]{String.format("%08d", ID), Name, Address, Age, Sex, VaccineName, VaccineType, DateGiven, AdministeredBy, NextDoseDate, Allergies, Reactions});
+        }
+    }
+    
+    public static void PopulateTable1() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         //Patient_List into patientTable
         for (Person person : PersonList) {
             int ID = person.getID();
-            String CompleteName = person.getCName();
+            String Name = person.getName();
             String Address = person.getAddress();
             String Age = person.getAge();
             String Sex = person.getSex();
             
-            model.addRow(new Object[]{String.format("%06d", ID), CompleteName, Address, Age, Sex});
-        }
-    }
-
-    /*public static void Populate_Table() {
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        //Patient_List into patientTable
-        for (Patient patient : PatientList) {
-            String ID = patient.getID();
-            String LName = patient.getLName();
-            String FName = patient.getFName();
-            String MName = patient.getMName();
-            String Address = patient.getAddress();
-            String Age = patient.getAge();
-            String Sex = patient.getSex();
-            String Height = patient.getHeight();
-            String Weight = patient.getWeight();
-            String VaccineStatus = patient.getVaccineStatus();
-            String VaccineName = patient.getVaccineStatus();
-                
-            model.addRow(new Object[]{ID, LName, FName, MName, Address, Age, Sex, Height, Weight, VaccineStatus, VaccineName});
+            model.addRow(new Object[]{String.format("%08d", ID), Name, Address, Age, Sex});
         }
     } 
 
@@ -127,8 +132,6 @@ public class Dashboard extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         L1Dashboard = new javax.swing.JPanel();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
-        jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -142,24 +145,34 @@ public class Dashboard extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jButton7 = new javax.swing.JButton();
         jButton21 = new javax.swing.JButton();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         L2Vaccines = new javax.swing.JPanel();
         jButton12 = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
         jButton15 = new javax.swing.JButton();
         jButton16 = new javax.swing.JButton();
+        jButton22 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         L3About = new javax.swing.JPanel();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
+        jButton24 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         L4Register = new javax.swing.JPanel();
         jButton17 = new javax.swing.JButton();
         jButton18 = new javax.swing.JButton();
         jButton19 = new javax.swing.JButton();
         jButton20 = new javax.swing.JButton();
+        jButton23 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
 
         jLabel10.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
@@ -261,21 +274,6 @@ public class Dashboard extends javax.swing.JFrame {
         L1Dashboard.setMinimumSize(new java.awt.Dimension(860, 510));
         L1Dashboard.setPreferredSize(new java.awt.Dimension(860, 510));
         L1Dashboard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 290, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 109, Short.MAX_VALUE)
-        );
-
-        jTabbedPane2.addTab("Statistics", jPanel3);
-
-        L1Dashboard.add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 30, 290, 140));
 
         jButton1.setBackground(new java.awt.Color(242, 242, 242));
         jButton1.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
@@ -408,6 +406,9 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
         jTable1.setSelectionBackground(new java.awt.Color(255, 153, 51));
+        jTable1.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        jTable1.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        jTable1.setSurrendersFocusOnKeystroke(true);
         jTable1.getTableHeader().setReorderingAllowed(false);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -441,6 +442,66 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
         L1Dashboard.add(jButton21, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 210, 80, 20));
+
+        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jTabbedPane1.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("jLabel12");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setText("Allergies:");
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel13.setText("Reactions:");
+
+        jTextField2.setText("jTextField2");
+
+        jTextField3.setText("jTextField3");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField3))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 18, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Medical Notes", jPanel2);
+
+        L1Dashboard.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 40, 290, 130));
 
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Resources\\Dashboard (9).png")); // NOI18N
         L1Dashboard.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 510));
@@ -518,6 +579,16 @@ public class Dashboard extends javax.swing.JFrame {
         });
         L2Vaccines.add(jButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 140, 40));
 
+        jButton22.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Resources\\icons8-back-21.png")); // NOI18N
+        jButton22.setBorderPainted(false);
+        jButton22.setContentAreaFilled(false);
+        jButton22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton22ActionPerformed(evt);
+            }
+        });
+        L2Vaccines.add(jButton22, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
         jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Resources\\Dashboard (8).png")); // NOI18N
         L2Vaccines.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -580,6 +651,16 @@ public class Dashboard extends javax.swing.JFrame {
         });
         L3About.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 140, 40));
 
+        jButton24.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Resources\\icons8-back-21.png")); // NOI18N
+        jButton24.setBorderPainted(false);
+        jButton24.setContentAreaFilled(false);
+        jButton24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton24ActionPerformed(evt);
+            }
+        });
+        L3About.add(jButton24, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
         jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Resources\\Dashboard (8).png")); // NOI18N
         L3About.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -641,6 +722,16 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
         L4Register.add(jButton20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 140, 40));
+
+        jButton23.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Resources\\icons8-back-21.png")); // NOI18N
+        jButton23.setBorderPainted(false);
+        jButton23.setContentAreaFilled(false);
+        jButton23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton23ActionPerformed(evt);
+            }
+        });
+        L4Register.add(jButton23, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         jLabel9.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Resources\\Dashboard (8).png")); // NOI18N
         L4Register.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -803,7 +894,7 @@ public class Dashboard extends javax.swing.JFrame {
                 "Select row",
                 JOptionPane.ERROR_MESSAGE);
         } else {
-            PersonList.remove(row);
+            PatientList.remove(row);
             DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
             model.removeRow(row);
             int rowCount = model.getRowCount();
@@ -957,12 +1048,54 @@ public class Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         String prevID = (String) model.getValueAt(model.getRowCount()-1, 0);
-        model.addRow(new Object[]{String.format("%06d", Integer.parseInt(prevID) +01)});
+        model.addRow(new Object[]{String.format("%08d", Integer.parseInt(prevID) +01)});
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
+        // TODO add your handling code here:
+        int confirmation = JOptionPane.showConfirmDialog(null, "Are you sure you want to log out?", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (confirmation == JOptionPane.YES_OPTION) {
+                LoadingScreen.setVisible(false);
+                L0LoginPage.setVisible(true);
+                L1Dashboard.setVisible(false);
+                L2Vaccines.setVisible(false);
+                L3About.setVisible(false);
+                L4Register.setVisible(false);
+            }
+            else {}
+    }//GEN-LAST:event_jButton22ActionPerformed
+
+    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
+        // TODO add your handling code here:
+        int confirmation = JOptionPane.showConfirmDialog(null, "Are you sure you want to log out?", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (confirmation == JOptionPane.YES_OPTION) {
+                LoadingScreen.setVisible(false);
+                L0LoginPage.setVisible(true);
+                L1Dashboard.setVisible(false);
+                L2Vaccines.setVisible(false);
+                L3About.setVisible(false);
+                L4Register.setVisible(false);
+            }
+            else {}
+    }//GEN-LAST:event_jButton23ActionPerformed
+
+    private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
+        // TODO add your handling code here:
+        int confirmation = JOptionPane.showConfirmDialog(null, "Are you sure you want to log out?", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (confirmation == JOptionPane.YES_OPTION) {
+                LoadingScreen.setVisible(false);
+                L0LoginPage.setVisible(true);
+                L1Dashboard.setVisible(false);
+                L2Vaccines.setVisible(false);
+                L3About.setVisible(false);
+                L4Register.setVisible(false);
+            }
+            else {}
+    }//GEN-LAST:event_jButton24ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1004,6 +1137,9 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton21;
+    private javax.swing.JButton jButton22;
+    private javax.swing.JButton jButton23;
+    private javax.swing.JButton jButton24;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -1015,6 +1151,9 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1023,11 +1162,13 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLayeredPane jLayeredPane2;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private static javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }

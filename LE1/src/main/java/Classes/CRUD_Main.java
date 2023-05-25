@@ -27,23 +27,24 @@ public class CRUD_Main {
 
     
 //Populate Database
-   public static void Populate_Database() {
+   public static void PopulateDatabase() {
       File file = new File(FILEPATHNAME);
       try (Scanner input = new Scanner(file)) {
          while (input.hasNextLine()) {
             String[] Line = input.nextLine().split(",");
             String ID = Line[0];
-            String LName = Line[1];
-            String FName = Line[2];
-            String MName = Line[3];
-            String Address = Line[3];
-            String Age = Line[4];
-            String Sex = Line[5];
-            String Height = Line[6];
-            String Weight = Line[7];
-            String vaccineStatus = Line[8];
-            String vaccineName = Line[9];
-            Patient patient = new Patient(Integer.parseInt(ID), LName, FName, MName, Address, Age, Sex, Height, Weight, vaccineStatus, vaccineName);
+            String Name = Line[1];
+            String Address = Line[2];
+            String Age = Line[3];
+            String Sex = Line[4];
+            String VaccineName = Line[5];
+            String VaccineType = Line[6];
+            String DateGiven = Line[7];
+            String AdministeredBy = Line[8];
+            String NextDoseDate = Line[9];
+            String Allergies = Line[10];
+            String Reactions = Line[11];
+            Patient patient = new Patient(Integer.parseInt(ID), Name, Address, Age, Sex, VaccineName, VaccineType, DateGiven, AdministeredBy, NextDoseDate, Allergies, Reactions);
             PatientList.add(patient);
          }
       } 
@@ -51,20 +52,19 @@ public class CRUD_Main {
          JOptionPane.showMessageDialog(null, "Database file not found!");
       }
    }
-         //Populate Database for dashboard
-   public static void Populate_Database1() {
+   
+   //Populate Database for dashboard
+   public static void PopulateDatabase1() {
       File file = new File(FILEPATHNAME);
       try (Scanner input = new Scanner(file)) {
          while (input.hasNextLine()) {
             String[] Line = input.nextLine().split(",");
             String ID = Line[0];
-            String LName = Line[1];
-            String FName = Line[2];
-            String MName = Line[3];
-            String Address = Line[4];
-            String Age = Line[5];
-            String Sex = Line[6];
-            Person person = new Person(Integer.parseInt(ID), LName, FName, MName, Address, Age, Sex);
+            String Name = Line[1];
+            String Address = Line[2];
+            String Age = Line[3];
+            String Sex = Line[4];
+            Person person = new Person(Integer.parseInt(ID), Name, Address, Age, Sex);
             PersonList.add(person);
          }
       } 
@@ -75,10 +75,10 @@ public class CRUD_Main {
    
    
    //Save to Database
-   public static void Save_To_Database() {
+   public static void SaveToDatabase() {
       try (PrintWriter writer = new PrintWriter(new FileWriter(FILEPATHNAME))) {
          for (Patient patient : PatientList) {
-            writer.println(patient.getFName() + "," + patient.getLName() + "," + patient.getAddress() + "," + patient.getAge() + "," + patient.getSex());
+            writer.println(patient.getID() + " " + patient.getName() + "," + patient.getAddress() + "," + patient.getAge() + "," + patient.getSex());
          }
          writer.close();
       } 
@@ -90,8 +90,9 @@ public class CRUD_Main {
    public static void Save_To_Database1() {
       try (PrintWriter writer = new PrintWriter(new FileWriter(FILEPATHNAME))) {
          for (Patient patient : PatientList) {
-            writer.println(patient.getFName() + "," + patient.getLName() + "," + patient.getAddress() + "," + patient.getAge() + "," + patient.getSex() + 
-                    patient.getHeight() + "," + patient.getWeight() + "," + patient.getVaccineStatus() + "," + patient.getVaccineName());
+            writer.println(patient.getID() + "," + patient.getName() + "," + patient.getAddress() + "," + patient.getAge() + "," + patient.getSex() + "," +
+                    patient.getVaccineName() + "," + patient.getVaccineType() + "," + patient.getVaccineType() + "," + patient.getDateGiven() + patient.getAdministeredBy() + "," +
+                    patient.getNextDoseDate() + "," + patient.getAllergies() + "," + patient.getReactions());
          }
          writer.close();
       } 
