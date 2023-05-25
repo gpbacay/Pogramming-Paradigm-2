@@ -78,7 +78,7 @@ public class Person {
     }
     
     public String getCName() {
-       String CName = LName + ", " + FName + " " + MName;
+       String CName = LName + " " + FName + " " + MName;
        return CName;
     }
 }
