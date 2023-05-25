@@ -75,7 +75,7 @@ public class CRUD_Main {
    
    
    //Save to Database
-   public static void SaveToDatabase() {
+   public static void SaveToDatabase1() {
       try (PrintWriter writer = new PrintWriter(new FileWriter(FILEPATHNAME))) {
          for (Patient patient : PatientList) {
             writer.println(patient.getID() + " " + patient.getName() + "," + patient.getAddress() + "," + patient.getAge() + "," + patient.getSex());
@@ -87,7 +87,7 @@ public class CRUD_Main {
       }
    }
    
-   public static void Save_To_Database1() {
+   public static void SaveToDatabase() {
       try (PrintWriter writer = new PrintWriter(new FileWriter(FILEPATHNAME))) {
          for (Patient patient : PatientList) {
             writer.println(patient.getID() + "," + patient.getName() + "," + patient.getAddress() + "," + patient.getAge() + "," + patient.getSex() + "," +

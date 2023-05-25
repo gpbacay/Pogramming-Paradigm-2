@@ -9,9 +9,8 @@ import Classes.CRUD_Account;
 import static Classes.CRUD_Account.AccountList;
 import Classes.CRUD_Main;
 import static Classes.CRUD_Main.PatientList;
-import static Classes.CRUD_Main.PersonList;
+import static Classes.CRUD_Main.SaveToDatabase;
 import Classes.Patient;
-import Classes.Person;
 import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.ImageIcon;
@@ -44,6 +43,9 @@ public class Dashboard extends javax.swing.JFrame {
         PopulateTable();
         
         jComboBox1.setSelectedIndex(0);
+        
+        jButton5.setEnabled(false);
+        jButton6.setEnabled(false);
         
         //Table Sorter
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(jTable1.getModel());
@@ -92,21 +94,21 @@ public class Dashboard extends javax.swing.JFrame {
             String Allergies = patient.getAllergies();
             String Reactions = patient.getReactions();
                 
-            model.addRow(new Object[]{String.format("%08d", ID), Name, Address, Age, Sex, VaccineName, VaccineType, DateGiven, AdministeredBy, NextDoseDate, Allergies, Reactions});
+            model.addRow(new Object[]{String.format("%06d", ID), Name, Address, Age, Sex, VaccineName, VaccineType, DateGiven, AdministeredBy, NextDoseDate, Allergies, Reactions});
         }
     }
     
     public static void PopulateTable1() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         //Patient_List into patientTable
-        for (Person person : PersonList) {
-            int ID = person.getID();
-            String Name = person.getName();
-            String Address = person.getAddress();
-            String Age = person.getAge();
-            String Sex = person.getSex();
+        for (Patient patient : PatientList) {
+            int ID = patient.getID();
+            String Name = patient.getName();
+            String Address = patient.getAddress();
+            String Age = patient.getAge();
+            String Sex = patient.getSex();
             
-            model.addRow(new Object[]{String.format("%08d", ID), Name, Address, Age, Sex});
+            model.addRow(new Object[]{String.format("%06d", ID), Name, Address, Age, Sex});
         }
     } 
 
@@ -138,7 +140,6 @@ public class Dashboard extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -351,22 +352,18 @@ public class Dashboard extends javax.swing.JFrame {
         });
         L1Dashboard.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 270, 70, 20));
 
+        jButton6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Resources\\icons8-remove-16.png")); // NOI18N
         jButton6.setText("Remove");
         jButton6.setBorder(null);
         jButton6.setBorderPainted(false);
         jButton6.setContentAreaFilled(false);
-        jButton6.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jButton6.setIconTextGap(6);
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
         });
-        L1Dashboard.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 210, -1, 20));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Resources\\icons8-remove-16.png")); // NOI18N
-        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        L1Dashboard.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 210, 20, 20));
+        L1Dashboard.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(733, 210, 80, 20));
 
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField1.setBorder(null);
@@ -394,11 +391,11 @@ public class Dashboard extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Name", "Address", "Age", "Sex"
+                "ID", "Name", "Address", "Age", "Sex", "Vaccine", "Type", "Date Given", "Administered By", "Next Dose Date", "Allergies", "Reactions"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true, true, true
+                false, true, true, true, true, true, true, true, true, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -413,6 +410,9 @@ public class Dashboard extends javax.swing.JFrame {
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable1MousePressed(evt);
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -785,6 +785,9 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        
+        
+        
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         int rowCount = model.getRowCount();
         int columnCount = model.getColumnCount();
@@ -894,9 +897,12 @@ public class Dashboard extends javax.swing.JFrame {
                 "Select row",
                 JOptionPane.ERROR_MESSAGE);
         } else {
-            PatientList.remove(row);
+            if (row >= 0 && row < PatientList.size()) {
+                PatientList.remove(row);
+            } else {}
             DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
             model.removeRow(row);
+                    
             int rowCount = model.getRowCount();
             int columnCount = model.getColumnCount();
 
@@ -921,6 +927,7 @@ public class Dashboard extends javax.swing.JFrame {
                 e.printStackTrace();
                 // Handle the exception appropriately
             }
+            SaveToDatabase();
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -1048,7 +1055,7 @@ public class Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         String prevID = (String) model.getValueAt(model.getRowCount()-1, 0);
-        model.addRow(new Object[]{String.format("%08d", Integer.parseInt(prevID) +01)});
+        model.addRow(new Object[]{String.format("%06d", Integer.parseInt(prevID) +01)});
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -1096,6 +1103,12 @@ public class Dashboard extends javax.swing.JFrame {
             }
             else {}
     }//GEN-LAST:event_jButton24ActionPerformed
+
+    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
+        // TODO add your handling code here:
+        jButton5.setEnabled(true);
+        jButton6.setEnabled(true);
+    }//GEN-LAST:event_jTable1MousePressed
 
     /**
      * @param args the command line arguments
@@ -1154,7 +1167,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
