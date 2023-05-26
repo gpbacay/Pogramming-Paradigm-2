@@ -367,7 +367,7 @@ public class Dashboard extends javax.swing.JFrame {
         });
         L1Dashboard.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 180, 20));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Name", "Address", "Age", "Sex" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Name", "Address", "Age", "Sex", "Vaccine" }));
         jComboBox1.setBorder(null);
         jComboBox1.setName(""); // NOI18N
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -406,6 +406,14 @@ public class Dashboard extends javax.swing.JFrame {
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jTable1MousePressed(evt);
+            }
+        });
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable1KeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTable1KeyTyped(evt);
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -924,6 +932,8 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
         // TODO add your handling code here:
+        PatientList.clear();
+        CRUD_Main.PopulateDatabase();
         int selectedRow = jTable1.getSelectedRow();
         jTable1.setRowSelectionInterval(selectedRow, selectedRow);
         jLabel12.setText(PatientList.get(selectedRow).getName());
@@ -934,6 +944,68 @@ public class Dashboard extends javax.swing.JFrame {
         jButton5.setEnabled(true);
         jButton6.setEnabled(true);
     }//GEN-LAST:event_jTable1MousePressed
+
+    private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
+        // TODO add your handling code here:
+        if (evt.isControlDown() && evt.getKeyCode() == java.awt.event.KeyEvent.VK_S) {
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            int rowCount = model.getRowCount();
+            int columnCount = model.getColumnCount();
+
+            try {
+                try (FileWriter fileWriter = new FileWriter("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Databases\\Patients.csv")) {   
+                    // Write the data rows
+                    for (int row = 0; row < rowCount; row++) {
+                        for (int column = 0; column < columnCount; column++) {
+                            Object cellValue = model.getValueAt(row, column);
+                            fileWriter.append(cellValue.toString());
+                            if (column < columnCount - 1) {
+                                fileWriter.append(",");
+                            } else {
+                                fileWriter.append("\n");
+                            }
+                        }
+                    }fileWriter.flush();
+                     // Display a message or perform any other necessary actions after saving
+                     JOptionPane.showMessageDialog(null, "Records successfully updated!");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                // Handle the exception appropriately
+            }
+            // Add your code here
+        } else if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            int rowCount = model.getRowCount();
+            int columnCount = model.getColumnCount();
+
+            try {
+                try (FileWriter fileWriter = new FileWriter("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Databases\\Patients.csv")) {   
+                    // Write the data rows
+                    for (int row = 0; row < rowCount; row++) {
+                        for (int column = 0; column < columnCount; column++) {
+                            Object cellValue = model.getValueAt(row, column);
+                            fileWriter.append(cellValue.toString());
+                            if (column < columnCount - 1) {
+                                fileWriter.append(",");
+                            } else {
+                                fileWriter.append("\n");
+                            }
+                        }
+                    }fileWriter.flush();
+                     // Display a message or perform any other necessary actions after saving
+                     JOptionPane.showMessageDialog(null, "Records successfully updated!");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                // Handle the exception appropriately
+            }
+        }
+    }//GEN-LAST:event_jTable1KeyPressed
+
+    private void jTable1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1KeyTyped
 
     /**
      * @param args the command line arguments
