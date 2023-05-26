@@ -116,7 +116,7 @@ public class CRUD_Main {
             }
            }
          case 1 -> CRUD_Account.OpenCSV();
-         case 3 -> {
+         case 2 -> {
              return;
            }
          default -> JOptionPane.showMessageDialog(null, "Invalid choice, please try again!");
