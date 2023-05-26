@@ -103,12 +103,23 @@ public class CRUD_Main {
    
    //Open
    public static void OpenCSV() {
-      File file = new File(FILEPATHNAME);
-      try {
-         Desktop.getDesktop().open(file);
+        String[] options = {"Registered Patients", "Authorize Accounts", "Cancel"};
+        int choice = JOptionPane.showOptionDialog(null, "What do you want to open?", "Databases", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+        switch (choice) {
+        case 0 -> {
+            File file = new File(FILEPATHNAME);
+            try {
+                Desktop.getDesktop().open(file);
+            }
+            catch (IOException e) {
+                e.getMessage();
+            }
+           }
+         case 1 -> CRUD_Account.OpenCSV();
+         case 3 -> {
+             return;
+           }
+         default -> JOptionPane.showMessageDialog(null, "Invalid choice, please try again!");
       }
-      catch (IOException e) {
-         e.getMessage();
-      }
-   } 
+   }
 }

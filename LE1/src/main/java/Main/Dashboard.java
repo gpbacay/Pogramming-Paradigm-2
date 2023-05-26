@@ -18,6 +18,8 @@ import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -29,6 +31,10 @@ public class Dashboard extends javax.swing.JFrame {
     
     public Dashboard() {
         initComponents();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM d, yyyy");
+        String formattedDate = dateFormat.format(new Date());
+        dateLabel.setText(formattedDate);
+
         LoggedAcc = "";
         CRUD_Account.Populate_Database();
         CRUD_Main.PopulateDatabase();
@@ -36,12 +42,19 @@ public class Dashboard extends javax.swing.JFrame {
         
         L0LoginPage.setVisible(true);
         L1Dashboard.setVisible(false);
-        L2Vaccines.setVisible(false);
+        L2Database.setVisible(false);
         L3About.setVisible(false);
-        L4Register.setVisible(false);
         
         
         jComboBox1.setSelectedIndex(0);
+        
+        jTable1.setRowSelectionInterval(0, 0);
+        int selectedRow = jTable1.getSelectedRow();
+        jLabel12.setText(PatientList.get(selectedRow).getName());
+        jLabel15.setText(PatientList.get(selectedRow).getVaccineName());
+        jLabel16.setText(PatientList.get(selectedRow).getDateGiven());
+        jLabel17.setText(PatientList.get(selectedRow).getNextDoseDate());
+        jLabel19.setText(PatientList.get(selectedRow).getVaccineType());
         
         jButton5.setEnabled(false);
         jButton6.setEnabled(false);
@@ -135,7 +148,6 @@ public class Dashboard extends javax.swing.JFrame {
         L1Dashboard = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
@@ -148,12 +160,18 @@ public class Dashboard extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        dateLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        L2Vaccines = new javax.swing.JPanel();
+        L2Database = new javax.swing.JPanel();
         jButton12 = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
         jButton15 = new javax.swing.JButton();
@@ -164,16 +182,8 @@ public class Dashboard extends javax.swing.JFrame {
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
         jButton24 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        L4Register = new javax.swing.JPanel();
-        jButton17 = new javax.swing.JButton();
-        jButton18 = new javax.swing.JButton();
-        jButton19 = new javax.swing.JButton();
-        jButton20 = new javax.swing.JButton();
-        jButton23 = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
 
         jLabel10.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -289,12 +299,12 @@ public class Dashboard extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        L1Dashboard.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 140, 40));
+        L1Dashboard.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 130, 30));
 
         jButton2.setBackground(new java.awt.Color(242, 242, 242));
         jButton2.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("VACCINES");
+        jButton2.setText("DATABASE");
         jButton2.setBorder(null);
         jButton2.setBorderPainted(false);
         jButton2.setContentAreaFilled(false);
@@ -305,23 +315,7 @@ public class Dashboard extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        L1Dashboard.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 140, 30));
-
-        jButton3.setBackground(new java.awt.Color(242, 242, 242));
-        jButton3.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("      REGISTER");
-        jButton3.setBorder(null);
-        jButton3.setBorderPainted(false);
-        jButton3.setContentAreaFilled(false);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setOpaque(false);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        L1Dashboard.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 140, 40));
+        L1Dashboard.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 130, 40));
 
         jButton4.setBackground(new java.awt.Color(242, 242, 242));
         jButton4.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
@@ -337,7 +331,7 @@ public class Dashboard extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        L1Dashboard.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 140, 40));
+        L1Dashboard.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 130, 20));
 
         jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Resources\\icons8-update-16.png")); // NOI18N
         jButton5.setText("Update");
@@ -349,7 +343,7 @@ public class Dashboard extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        L1Dashboard.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 270, 70, 20));
+        L1Dashboard.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 270, 70, 20));
 
         jButton6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Resources\\icons8-remove-16.png")); // NOI18N
         jButton6.setText("Remove");
@@ -362,7 +356,7 @@ public class Dashboard extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        L1Dashboard.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(733, 210, 80, 20));
+        L1Dashboard.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 210, 70, 20));
 
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField1.setBorder(null);
@@ -371,7 +365,7 @@ public class Dashboard extends javax.swing.JFrame {
                 jTextField1ActionPerformed(evt);
             }
         });
-        L1Dashboard.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 210, 160, 20));
+        L1Dashboard.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 180, 20));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Name", "Address", "Age", "Sex" }));
         jComboBox1.setBorder(null);
@@ -381,7 +375,7 @@ public class Dashboard extends javax.swing.JFrame {
                 jComboBox1ActionPerformed(evt);
             }
         });
-        L1Dashboard.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 210, 100, 20));
+        L1Dashboard.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 210, 90, 20));
 
         jTable1.setBackground(new java.awt.Color(102, 102, 255));
         jTable1.setForeground(new java.awt.Color(255, 255, 255));
@@ -416,7 +410,7 @@ public class Dashboard extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        L1Dashboard.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, 560, 190));
+        L1Dashboard.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, 610, 190));
 
         jButton7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Resources\\icons8-back-21.png")); // NOI18N
         jButton7.setBorderPainted(false);
@@ -440,26 +434,34 @@ public class Dashboard extends javax.swing.JFrame {
                 jButton21ActionPerformed(evt);
             }
         });
-        L1Dashboard.add(jButton21, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 210, 80, 20));
+        L1Dashboard.add(jButton21, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 210, -1, 20));
 
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane1.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
 
         jLabel12.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("Name");
+        jLabel12.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("Allergies:");
+        jLabel3.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        jLabel3.setText("Vaccine:");
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel13.setText("Reactions:");
+        jLabel13.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        jLabel13.setText("Date Given:");
 
-        jTextField2.setText("jTextField2");
+        jLabel14.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        jLabel14.setText("Next Dose Date:");
 
-        jTextField3.setText("jTextField3");
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+
+        jLabel18.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        jLabel18.setText("Type:");
+
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -468,51 +470,70 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField3))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 18, Short.MAX_VALUE)))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel18)
+                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Medical Notes", jPanel2);
+        jTabbedPane1.addTab("Medical Details", jPanel2);
 
-        L1Dashboard.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 40, 290, 130));
+        L1Dashboard.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 40, 310, 140));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Resources\\Dashboard (9).png")); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setText("Current Date:");
+        L1Dashboard.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, -1, 20));
+
+        dateLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        L1Dashboard.add(dateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 160, 140, 20));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Resources\\Dashboard (11).png")); // NOI18N
         L1Dashboard.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 510));
 
         jLayeredPane2.setLayer(L1Dashboard, javax.swing.JLayeredPane.POPUP_LAYER);
         jLayeredPane2.add(L1Dashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, 0, -1, -1));
 
-        L2Vaccines.setBackground(new java.awt.Color(255, 255, 255));
-        L2Vaccines.setMaximumSize(new java.awt.Dimension(860, 510));
-        L2Vaccines.setMinimumSize(new java.awt.Dimension(860, 510));
-        L2Vaccines.setPreferredSize(new java.awt.Dimension(860, 510));
-        L2Vaccines.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        L2Database.setBackground(new java.awt.Color(255, 255, 255));
+        L2Database.setMaximumSize(new java.awt.Dimension(860, 510));
+        L2Database.setMinimumSize(new java.awt.Dimension(860, 510));
+        L2Database.setPreferredSize(new java.awt.Dimension(860, 510));
+        L2Database.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton12.setBackground(new java.awt.Color(242, 242, 242));
         jButton12.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
@@ -528,12 +549,12 @@ public class Dashboard extends javax.swing.JFrame {
                 jButton12ActionPerformed(evt);
             }
         });
-        L2Vaccines.add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 140, 40));
+        L2Database.add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 140, 40));
 
         jButton14.setBackground(new java.awt.Color(242, 242, 242));
         jButton14.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         jButton14.setForeground(new java.awt.Color(255, 255, 255));
-        jButton14.setText("VACCINES");
+        jButton14.setText("DATABASE");
         jButton14.setBorder(null);
         jButton14.setBorderPainted(false);
         jButton14.setContentAreaFilled(false);
@@ -544,7 +565,7 @@ public class Dashboard extends javax.swing.JFrame {
                 jButton14ActionPerformed(evt);
             }
         });
-        L2Vaccines.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 140, 30));
+        L2Database.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 140, 30));
 
         jButton15.setBackground(new java.awt.Color(242, 242, 242));
         jButton15.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
@@ -560,7 +581,7 @@ public class Dashboard extends javax.swing.JFrame {
                 jButton15ActionPerformed(evt);
             }
         });
-        L2Vaccines.add(jButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 140, 40));
+        L2Database.add(jButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 140, 40));
 
         jButton16.setBackground(new java.awt.Color(242, 242, 242));
         jButton16.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
@@ -576,7 +597,7 @@ public class Dashboard extends javax.swing.JFrame {
                 jButton16ActionPerformed(evt);
             }
         });
-        L2Vaccines.add(jButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 140, 40));
+        L2Database.add(jButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 140, 40));
 
         jButton22.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Resources\\icons8-back-21.png")); // NOI18N
         jButton22.setBorderPainted(false);
@@ -586,12 +607,12 @@ public class Dashboard extends javax.swing.JFrame {
                 jButton22ActionPerformed(evt);
             }
         });
-        L2Vaccines.add(jButton22, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        L2Database.add(jButton22, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Resources\\Dashboard (8).png")); // NOI18N
-        L2Vaccines.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        L2Database.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jLayeredPane2.add(L2Vaccines, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, -1));
+        jLayeredPane2.add(L2Database, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, -1));
 
         L3About.setMaximumSize(new java.awt.Dimension(860, 510));
         L3About.setMinimumSize(new java.awt.Dimension(860, 510));
@@ -608,11 +629,11 @@ public class Dashboard extends javax.swing.JFrame {
                 jButton9ActionPerformed(evt);
             }
         });
-        L3About.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 140, 40));
+        L3About.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, 40));
 
         jButton10.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         jButton10.setForeground(new java.awt.Color(255, 255, 255));
-        jButton10.setText("VACCINES");
+        jButton10.setText("DATABASE");
         jButton10.setBorderPainted(false);
         jButton10.setContentAreaFilled(false);
         jButton10.addActionListener(new java.awt.event.ActionListener() {
@@ -620,7 +641,7 @@ public class Dashboard extends javax.swing.JFrame {
                 jButton10ActionPerformed(evt);
             }
         });
-        L3About.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 140, 30));
+        L3About.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 130, 40));
 
         jButton11.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         jButton11.setForeground(new java.awt.Color(255, 255, 255));
@@ -632,23 +653,7 @@ public class Dashboard extends javax.swing.JFrame {
                 jButton11ActionPerformed(evt);
             }
         });
-        L3About.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 343, 140, 30));
-
-        jButton13.setBackground(new java.awt.Color(242, 242, 242));
-        jButton13.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        jButton13.setForeground(new java.awt.Color(255, 255, 255));
-        jButton13.setText("      REGISTER");
-        jButton13.setBorder(null);
-        jButton13.setBorderPainted(false);
-        jButton13.setContentAreaFilled(false);
-        jButton13.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton13.setOpaque(false);
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
-            }
-        });
-        L3About.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 140, 40));
+        L3About.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 130, 40));
 
         jButton24.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Resources\\icons8-back-21.png")); // NOI18N
         jButton24.setBorderPainted(false);
@@ -660,82 +665,10 @@ public class Dashboard extends javax.swing.JFrame {
         });
         L3About.add(jButton24, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Resources\\Dashboard (8).png")); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Resources\\about.png")); // NOI18N
         L3About.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jLayeredPane2.add(L3About, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        L4Register.setMaximumSize(new java.awt.Dimension(860, 510));
-        L4Register.setMinimumSize(new java.awt.Dimension(860, 510));
-        L4Register.setPreferredSize(new java.awt.Dimension(860, 510));
-        L4Register.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jButton17.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        jButton17.setForeground(new java.awt.Color(255, 255, 255));
-        jButton17.setText("DASHBOARD");
-        jButton17.setBorderPainted(false);
-        jButton17.setContentAreaFilled(false);
-        jButton17.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton17ActionPerformed(evt);
-            }
-        });
-        L4Register.add(jButton17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 140, 40));
-
-        jButton18.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        jButton18.setForeground(new java.awt.Color(255, 255, 255));
-        jButton18.setText("VACCINES");
-        jButton18.setBorderPainted(false);
-        jButton18.setContentAreaFilled(false);
-        jButton18.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton18ActionPerformed(evt);
-            }
-        });
-        L4Register.add(jButton18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 140, 30));
-
-        jButton19.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        jButton19.setForeground(new java.awt.Color(255, 255, 255));
-        jButton19.setText("ABOUT");
-        jButton19.setBorderPainted(false);
-        jButton19.setContentAreaFilled(false);
-        jButton19.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton19ActionPerformed(evt);
-            }
-        });
-        L4Register.add(jButton19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 343, 140, 30));
-
-        jButton20.setBackground(new java.awt.Color(242, 242, 242));
-        jButton20.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        jButton20.setForeground(new java.awt.Color(255, 255, 255));
-        jButton20.setText("      REGISTER");
-        jButton20.setBorder(null);
-        jButton20.setBorderPainted(false);
-        jButton20.setContentAreaFilled(false);
-        jButton20.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton20.setOpaque(false);
-        jButton20.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton20ActionPerformed(evt);
-            }
-        });
-        L4Register.add(jButton20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 140, 40));
-
-        jButton23.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Resources\\icons8-back-21.png")); // NOI18N
-        jButton23.setBorderPainted(false);
-        jButton23.setContentAreaFilled(false);
-        jButton23.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton23ActionPerformed(evt);
-            }
-        });
-        L4Register.add(jButton23, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-
-        jLabel9.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Resources\\Dashboard (8).png")); // NOI18N
-        L4Register.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        jLayeredPane2.add(L4Register, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         getContentPane().add(jLayeredPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 510));
 
@@ -747,39 +680,22 @@ public class Dashboard extends javax.swing.JFrame {
         LoadingScreen.setVisible(false);
         L0LoginPage.setVisible(false);
         L1Dashboard.setVisible(true);
-        L2Vaccines.setVisible(false);
+        L2Database.setVisible(false);
         L3About.setVisible(false);
-        L4Register.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        LoadingScreen.setVisible(false);
-        L0LoginPage.setVisible(false);
-        L1Dashboard.setVisible(false);
-        L2Vaccines.setVisible(true);
-        L3About.setVisible(false);
-        L4Register.setVisible(false);
+        CRUD_Main.OpenCSV();
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        LoadingScreen.setVisible(false);
-        L0LoginPage.setVisible(false);
-        L1Dashboard.setVisible(false);
-        L2Vaccines.setVisible(false);
-        L3About.setVisible(false);
-        L4Register.setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         LoadingScreen.setVisible(false);
         L0LoginPage.setVisible(false);
         L1Dashboard.setVisible(false);
-        L2Vaccines.setVisible(false);
+        L2Database.setVisible(false);
         L3About.setVisible(true);
-        L4Register.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -827,9 +743,8 @@ public class Dashboard extends javax.swing.JFrame {
                 LoadingScreen.setVisible(false);
                 L0LoginPage.setVisible(true);
                 L1Dashboard.setVisible(false);
-                L2Vaccines.setVisible(false);
+                L2Database.setVisible(false);
                 L3About.setVisible(false);
-                L4Register.setVisible(false);
             }
             else {}
     }//GEN-LAST:event_jButton7ActionPerformed
@@ -858,9 +773,8 @@ public class Dashboard extends javax.swing.JFrame {
                     
                     L0LoginPage.setVisible(false);
                     L1Dashboard.setVisible(true);
-                    L2Vaccines.setVisible(false);
+                    L2Database.setVisible(false);
                     L3About.setVisible(false);
-                    L4Register.setVisible(false);
                 }
                 else {
                     JOptionPane.showMessageDialog(null, "Account not found! Access denied!");
@@ -919,29 +833,13 @@ public class Dashboard extends javax.swing.JFrame {
         LoadingScreen.setVisible(false);
         L0LoginPage.setVisible(false);
         L1Dashboard.setVisible(true);
-        L2Vaccines.setVisible(false);
+        L2Database.setVisible(false);
         L3About.setVisible(false);
-        L4Register.setVisible(false);
     }//GEN-LAST:event_jButton9ActionPerformed
-
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        // TODO add your handling code here:
-        LoadingScreen.setVisible(false);
-        L0LoginPage.setVisible(false);
-        L1Dashboard.setVisible(false);
-        L2Vaccines.setVisible(false);
-        L3About.setVisible(false);
-        L4Register.setVisible(true);
-    }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
-        LoadingScreen.setVisible(false);
-        L0LoginPage.setVisible(false);
-        L1Dashboard.setVisible(false);
-        L2Vaccines.setVisible(true);
-        L3About.setVisible(false);
-        L4Register.setVisible(false);
+        CRUD_Main.OpenCSV();
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
@@ -949,9 +847,8 @@ public class Dashboard extends javax.swing.JFrame {
         LoadingScreen.setVisible(false);
         L0LoginPage.setVisible(false);
         L1Dashboard.setVisible(false);
-        L2Vaccines.setVisible(false);
+        L2Database.setVisible(false);
         L3About.setVisible(true);
-        L4Register.setVisible(false);
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
@@ -959,19 +856,13 @@ public class Dashboard extends javax.swing.JFrame {
         LoadingScreen.setVisible(false);
         L0LoginPage.setVisible(false);
         L1Dashboard.setVisible(true);
-        L2Vaccines.setVisible(false);
+        L2Database.setVisible(false);
         L3About.setVisible(false);
-        L4Register.setVisible(false);
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         // TODO add your handling code here:
-        LoadingScreen.setVisible(false);
-        L0LoginPage.setVisible(false);
-        L1Dashboard.setVisible(false);
-        L2Vaccines.setVisible(true);
-        L3About.setVisible(false);
-        L4Register.setVisible(false);
+        CRUD_Main.OpenCSV();
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
@@ -979,9 +870,8 @@ public class Dashboard extends javax.swing.JFrame {
         LoadingScreen.setVisible(false);
         L0LoginPage.setVisible(false);
         L1Dashboard.setVisible(false);
-        L2Vaccines.setVisible(false);
+        L2Database.setVisible(false);
         L3About.setVisible(true);
-        L4Register.setVisible(false);
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
@@ -989,50 +879,9 @@ public class Dashboard extends javax.swing.JFrame {
         LoadingScreen.setVisible(false);
         L0LoginPage.setVisible(false);
         L1Dashboard.setVisible(false);
-        L2Vaccines.setVisible(false);
+        L2Database.setVisible(false);
         L3About.setVisible(false);
-        L4Register.setVisible(true);
     }//GEN-LAST:event_jButton16ActionPerformed
-
-    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-        // TODO add your handling code here:
-        LoadingScreen.setVisible(false);
-        L0LoginPage.setVisible(false);
-        L1Dashboard.setVisible(true);
-        L2Vaccines.setVisible(false);
-        L3About.setVisible(false);
-        L4Register.setVisible(false);
-    }//GEN-LAST:event_jButton17ActionPerformed
-
-    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
-        // TODO add your handling code here:
-        LoadingScreen.setVisible(false);
-        L0LoginPage.setVisible(false);
-        L1Dashboard.setVisible(false);
-        L2Vaccines.setVisible(true);
-        L3About.setVisible(false);
-        L4Register.setVisible(false);
-    }//GEN-LAST:event_jButton18ActionPerformed
-
-    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-        // TODO add your handling code here:
-        LoadingScreen.setVisible(false);
-        L0LoginPage.setVisible(false);
-        L1Dashboard.setVisible(false);
-        L2Vaccines.setVisible(false);
-        L3About.setVisible(true);
-        L4Register.setVisible(false);
-    }//GEN-LAST:event_jButton19ActionPerformed
-
-    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-        // TODO add your handling code here:
-        LoadingScreen.setVisible(false);
-        L0LoginPage.setVisible(false);
-        L1Dashboard.setVisible(false);
-        L2Vaccines.setVisible(false);
-        L3About.setVisible(false);
-        L4Register.setVisible(true);
-    }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
         // TODO add your handling code here:
@@ -1054,26 +903,11 @@ public class Dashboard extends javax.swing.JFrame {
                 LoadingScreen.setVisible(false);
                 L0LoginPage.setVisible(true);
                 L1Dashboard.setVisible(false);
-                L2Vaccines.setVisible(false);
+                L2Database.setVisible(false);
                 L3About.setVisible(false);
-                L4Register.setVisible(false);
             }
             else {}
     }//GEN-LAST:event_jButton22ActionPerformed
-
-    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
-        // TODO add your handling code here:
-        int confirmation = JOptionPane.showConfirmDialog(null, "Are you sure you want to log out?", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (confirmation == JOptionPane.YES_OPTION) {
-                LoadingScreen.setVisible(false);
-                L0LoginPage.setVisible(true);
-                L1Dashboard.setVisible(false);
-                L2Vaccines.setVisible(false);
-                L3About.setVisible(false);
-                L4Register.setVisible(false);
-            }
-            else {}
-    }//GEN-LAST:event_jButton23ActionPerformed
 
     private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
         // TODO add your handling code here:
@@ -1082,15 +916,21 @@ public class Dashboard extends javax.swing.JFrame {
                 LoadingScreen.setVisible(false);
                 L0LoginPage.setVisible(true);
                 L1Dashboard.setVisible(false);
-                L2Vaccines.setVisible(false);
+                L2Database.setVisible(false);
                 L3About.setVisible(false);
-                L4Register.setVisible(false);
             }
             else {}
     }//GEN-LAST:event_jButton24ActionPerformed
 
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
         // TODO add your handling code here:
+        int selectedRow = jTable1.getSelectedRow();
+        jTable1.setRowSelectionInterval(selectedRow, selectedRow);
+        jLabel12.setText(PatientList.get(selectedRow).getName());
+        jLabel15.setText(PatientList.get(selectedRow).getVaccineName());
+        jLabel16.setText(PatientList.get(selectedRow).getDateGiven());
+        jLabel17.setText(PatientList.get(selectedRow).getNextDoseDate());
+        jLabel19.setText(PatientList.get(selectedRow).getVaccineType());
         jButton5.setEnabled(true);
         jButton6.setEnabled(true);
     }//GEN-LAST:event_jTable1MousePressed
@@ -1116,29 +956,22 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JTextField ID;
     private javax.swing.JPanel L0LoginPage;
     private javax.swing.JPanel L1Dashboard;
-    private javax.swing.JPanel L2Vaccines;
+    private javax.swing.JPanel L2Database;
     private javax.swing.JPanel L3About;
-    private javax.swing.JPanel L4Register;
     private static javax.swing.JPanel LoadingScreen;
     private javax.swing.JPasswordField Password;
+    private javax.swing.JLabel dateLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton17;
-    private javax.swing.JButton jButton18;
-    private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton21;
     private javax.swing.JButton jButton22;
-    private javax.swing.JButton jButton23;
     private javax.swing.JButton jButton24;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
@@ -1151,13 +984,19 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JProgressBar jProgressBar1;
@@ -1165,7 +1004,5 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private static javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }
