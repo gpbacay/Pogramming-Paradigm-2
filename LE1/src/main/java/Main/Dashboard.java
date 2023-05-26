@@ -9,7 +9,6 @@ import Classes.CRUD_Account;
 import static Classes.CRUD_Account.AccountList;
 import Classes.CRUD_Main;
 import static Classes.CRUD_Main.PatientList;
-import static Classes.CRUD_Main.SaveToDatabase;
 import Classes.Patient;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -26,21 +25,21 @@ import javax.swing.table.TableRowSorter;
  */
 public class Dashboard extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Dashboard
-     */
+    private String LoggedAcc;
+    
     public Dashboard() {
         initComponents();
-        LoadingScreen.setVisible(true);
+        LoggedAcc = "";
+        CRUD_Account.Populate_Database();
+        CRUD_Main.PopulateDatabase();
+        PopulateTable();
+        
         L0LoginPage.setVisible(true);
         L1Dashboard.setVisible(false);
         L2Vaccines.setVisible(false);
         L3About.setVisible(false);
         L4Register.setVisible(false);
         
-        CRUD_Account.Populate_Database();
-        CRUD_Main.PopulateDatabase();
-        PopulateTable();
         
         jComboBox1.setSelectedIndex(0);
         
@@ -448,7 +447,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         jLabel12.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("jLabel12");
+        jLabel12.setText("Name");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -786,8 +785,6 @@ public class Dashboard extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         
-        
-        
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         int rowCount = model.getRowCount();
         int columnCount = model.getColumnCount();
@@ -854,23 +851,10 @@ public class Dashboard extends javax.swing.JFrame {
             String identification = ID.getText().trim();
             String password = Password.getText().trim();
             
+            
             for (Account acc : AccountList) {
                 if(identification.equalsIgnoreCase(acc.getID()) && password.equalsIgnoreCase(acc.getPassword())) {
-//                    L0LoginPage.setVisible(false);
-//                    LoadingScreen.setVisible(true);
-//                    L1Dashboard.setVisible(false);
-//                    L2Vaccines.setVisible(false);
-//                    L3About.setVisible(false);
-//                    L4Register.setVisible(false);
-//                    try {
-//                        for (int i = 0; i <= 100; i++) {
-//                            Thread.sleep(50);
-//                            jLabel11.setText(Integer.toString(i) + "%");
-//                            jProgressBar1.setValue(i);
-//                        }
-//                    } catch (Exception e) {
-//                        
-//                    }
+                    LoggedAcc = acc.getName();
                     
                     L0LoginPage.setVisible(false);
                     L1Dashboard.setVisible(true);
@@ -927,7 +911,6 @@ public class Dashboard extends javax.swing.JFrame {
                 e.printStackTrace();
                 // Handle the exception appropriately
             }
-            SaveToDatabase();
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -1055,7 +1038,9 @@ public class Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         String prevID = (String) model.getValueAt(model.getRowCount()-1, 0);
-        model.addRow(new Object[]{String.format("%06d", Integer.parseInt(prevID) +01)});
+        Patient patientToAdd = new Patient(Integer.parseInt(String.format("%06d", Integer.parseInt(prevID) +01)),null, null, null, null, null, null, null, LoggedAcc, null, null, null);
+        PatientList.add(patientToAdd);
+        model.addRow(new Object[]{String.format("%06d", Integer.parseInt(prevID) +01),null, null, null, null, null, null, null, LoggedAcc, null, null, null});
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked

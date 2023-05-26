@@ -32,7 +32,8 @@ public class CRUD_Account {
                String[] Line = input.nextLine().split(",");
                String ID = Line[0];
                String Password = Line[1];
-               Account acc = new Account(ID, Password);
+               String Name = Line[2];
+               Account acc = new Account(ID, Password, Name);
                AccountList.add(acc);
             }
         } 
@@ -45,7 +46,7 @@ public class CRUD_Account {
    public static void Save_To_Database() {
       try (PrintWriter writer = new PrintWriter(new FileWriter(FILEPATHNAME))) {
          for (Account acc : AccountList) {
-            writer.println(acc.getID() + "," + acc.getPassword());
+            writer.println(acc.getID() + "," + acc.getPassword() + "," + acc.getName());
          }
          writer.close();
       } 
@@ -72,7 +73,12 @@ public class CRUD_Account {
          return;
       }
       
-      Account acc = new Account(ID, Password);
+      String Name = JOptionPane.showInputDialog(null, "Enter Name:");
+      if(Name == null) {
+         return;
+      }
+      
+      Account acc = new Account(ID, Password, Name);
       AccountList.add(acc);
       Save_To_Database();
       JOptionPane.showMessageDialog(null, "Person successfully added to the database!");
