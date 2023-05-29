@@ -6,7 +6,7 @@ package Main;
 
 import Classes.HealthWorker;
 import Classes.HealthWorkerCRUD;
-import static Classes.HealthWorkerCRUD.AccountList;
+import static Classes.HealthWorkerCRUD.HealthWorkerList;
 import Classes.MainCRUD;
 import static Classes.MainCRUD.PatientList;
 import Classes.Patient;
@@ -200,6 +200,7 @@ public class Main extends javax.swing.JFrame {
         jButton13 = new javax.swing.JButton();
         jButton16 = new javax.swing.JButton();
         jButton18 = new javax.swing.JButton();
+        jButton17 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         L3About = new javax.swing.JPanel();
         jButton9 = new javax.swing.JButton();
@@ -278,7 +279,7 @@ public class Main extends javax.swing.JFrame {
         jLabel5.setText("Authentication Passcode:");
         L0LoginPage.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, 180, -1));
 
-        Password.setText("admin1");
+        Password.setText("admin0");
         Password.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         Password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -682,8 +683,8 @@ public class Main extends javax.swing.JFrame {
         });
         L2Database.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, 260, 30));
 
-        jButton16.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Resources\\icons8-open-16.png")); // NOI18N
-        jButton16.setToolTipText("Open");
+        jButton16.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Resources\\icons8-add-16 (2).png")); // NOI18N
+        jButton16.setToolTipText("Add Authorized Health Worker");
         jButton16.setBorderPainted(false);
         jButton16.setContentAreaFilled(false);
         jButton16.addActionListener(new java.awt.event.ActionListener() {
@@ -691,7 +692,7 @@ public class Main extends javax.swing.JFrame {
                 jButton16ActionPerformed(evt);
             }
         });
-        L2Database.add(jButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 300, 40, 20));
+        L2Database.add(jButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 340, 40, 20));
 
         jButton18.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Resources\\icons8-open-16.png")); // NOI18N
         jButton18.setToolTipText("Open");
@@ -703,6 +704,17 @@ public class Main extends javax.swing.JFrame {
             }
         });
         L2Database.add(jButton18, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, 40, 20));
+
+        jButton17.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Resources\\icons8-open-16.png")); // NOI18N
+        jButton17.setToolTipText("Open");
+        jButton17.setBorderPainted(false);
+        jButton17.setContentAreaFilled(false);
+        jButton17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton17ActionPerformed(evt);
+            }
+        });
+        L2Database.add(jButton17, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 300, 40, 20));
 
         jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Resources\\about (2).png")); // NOI18N
         L2Database.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -864,22 +876,23 @@ public class Main extends javax.swing.JFrame {
             String identification = ID.getText().trim();
             String password = Password.getText().trim();
             
-            
-            for (HealthWorker hW : AccountList) {
-                System.out.println(String.valueOf(hW.getID()));
-                if(identification.equalsIgnoreCase(String.format("%06d",hW.getID())) && password.equalsIgnoreCase(hW.getPassword())) {
+            boolean hWFound = false;
+            for (HealthWorker hW : HealthWorkerList) {
+                if(String.format("%06d", hW.getID()).equalsIgnoreCase(identification) && password.equals(hW.getPassword())) {
                     LoggedAcc = hW.getName();
                     
                     L0LoginPage.setVisible(false);
                     L1Dashboard.setVisible(true);
                     L2Database.setVisible(false);
                     L3About.setVisible(false);
+                    hWFound = true;
+                    break;
                 }
-                else {
-                    JOptionPane.showMessageDialog(null, "Account not found! Access denied!");
-                    ID.setText("");
-                    Password.setText("");
-                }
+            }
+            if (hWFound == false) {
+                JOptionPane.showMessageDialog(null, "Account not found! Access denied!");
+                ID.setText("");
+                Password.setText("");
             }
         }
     }//GEN-LAST:event_jButton8ActionPerformed
@@ -1144,13 +1157,18 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         // TODO add your handling code here:
-        HealthWorkerCRUD.OpenCSV();
+        HealthWorkerCRUD.CreateAccount();
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
         // TODO add your handling code here:
         MainCRUD.OpenCSV();
     }//GEN-LAST:event_jButton18ActionPerformed
+
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        // TODO add your handling code here:
+        HealthWorkerCRUD.OpenCSV();
+    }//GEN-LAST:event_jButton17ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1186,6 +1204,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
+    private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton21;

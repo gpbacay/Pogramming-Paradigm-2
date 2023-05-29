@@ -22,7 +22,7 @@ public class HealthWorkerCRUD {
     //Database
     private static final String FILEPATHNAME = "C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Databases\\HealthWorker.csv";
     //ArrayList
-    public static ArrayList<HealthWorker> AccountList = new ArrayList<>();
+    public static ArrayList<HealthWorker> HealthWorkerList = new ArrayList<>();
 
     //Populate Database
     public static void Populate_Database() {
@@ -36,8 +36,8 @@ public class HealthWorkerCRUD {
                 String Age = Line[3];
                 String Sex = Line[4];
                 String Password = Line[5];
-               HealthWorker hW = new HealthWorker(Integer.parseInt(ID), Name, Address, Age, Sex, Password);
-               AccountList.add(hW);
+                HealthWorker hW = new HealthWorker(Integer.parseInt(ID), Name, Address, Age, Sex, Password);
+                HealthWorkerList.add(hW);
             }
         } 
         catch (FileNotFoundException e) {
@@ -48,8 +48,8 @@ public class HealthWorkerCRUD {
    //Save to Database
    public static void Save_To_Database() {
       try (PrintWriter writer = new PrintWriter(new FileWriter(FILEPATHNAME))) {
-         for (HealthWorker acc : AccountList) {
-            writer.println(acc.getID() + "," + acc.getPassword() + "," + acc.getName());
+         for (HealthWorker hW : HealthWorkerList) {
+            writer.println(String.format("%06d", hW.getID()) + "," + hW.getName() + "," + hW.getAddress() + "," + hW.getAge() + "," + hW.getSex() + "," + hW.getPassword());
          }
          writer.close();
       } 
@@ -97,7 +97,7 @@ public class HealthWorkerCRUD {
       }
       
       HealthWorker hW = new HealthWorker(Integer.parseInt(ID), Name, Address, Age, Sex, Password);
-      AccountList.add(hW);
+      HealthWorkerList.add(hW);
       Save_To_Database();
       JOptionPane.showMessageDialog(null, "Health worker successfully added to the database!");
    }
@@ -109,17 +109,17 @@ public class HealthWorkerCRUD {
          return;
       }
       
-      boolean accountFound = false;
-      for (HealthWorker hW : AccountList) {
+      boolean hWFound = false;
+      for (HealthWorker hW : HealthWorkerList) {
          if (ID.equalsIgnoreCase(String.valueOf(hW.getID()))) {
             JOptionPane.showMessageDialog(null, "Health worker Found!\n\n" +
                "ID: " + hW.getID() + "\n" +
                "Password: " + hW.getPassword());
-            accountFound = true;
+            hWFound = true;
             break;
          }
       }
-      if (!accountFound && ID != null) {
+      if (!hWFound && ID != null) {
          JOptionPane.showMessageDialog(null, "Health worker not found!");
       }
    }

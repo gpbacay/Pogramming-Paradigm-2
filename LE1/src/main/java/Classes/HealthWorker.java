@@ -9,20 +9,20 @@ package Classes;
  * @author Gianne Bacay
  */
 public class HealthWorker extends Person{
-    private static String password;
+    private String password;
     
     public HealthWorker() {
         super();
-        HealthWorker.password = "";
+        this.password = "";
     }
     
     public HealthWorker(int ID, String Name, String Address, String Age, String Sex, String password) {
         super(ID, Name, Address, Age, Sex);
-        HealthWorker.password = password;
+        this.password = password;
     }
 
     public void setPassword(String password) {
-        HealthWorker.password = password;
+        this.password = password;
     }
 
     public String getPassword() {
