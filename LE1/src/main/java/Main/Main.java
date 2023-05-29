@@ -27,7 +27,7 @@ import static Classes.MainCRUD.ChildList;
  */
 public class Main extends javax.swing.JFrame {
 
-    private String LoggedAcc;
+    private String LoggedHW;
     
     public Main() {
         initComponents();
@@ -35,7 +35,7 @@ public class Main extends javax.swing.JFrame {
         String formattedDate = dateFormat.format(new Date());
         dateLabel.setText(formattedDate);
 
-        LoggedAcc = "";
+        LoggedHW = "";
         HealthWorkerCRUD.Populate_Database();
         MainCRUD.PopulateDatabase();
         PopulateTable();
@@ -121,20 +121,6 @@ public class Main extends javax.swing.JFrame {
             model.addRow(new Object[]{String.format("%06d", ID), Name, Address, Age, Sex, VaccineName, VaccineType, DateGiven, AdministeredBy, NextDoseDate, Allergies, Reactions});
         }
     }
-    
-    public static void PopulateTable1() {
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        //Patient_List into patientTable
-        for (Child child : ChildList) {
-            int ID = child.getID();
-            String Name = child.getName();
-            String Address = child.getAddress();
-            String Age = child.getAge();
-            String Sex = child.getSex();
-            
-            model.addRow(new Object[]{String.format("%06d", ID), Name, Address, Age, Sex});
-        }
-    } 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -879,7 +865,7 @@ public class Main extends javax.swing.JFrame {
             boolean hWFound = false;
             for (HealthWorker hW : HealthWorkerList) {
                 if(String.format("%06d", hW.getID()).equalsIgnoreCase(identification) && password.equals(hW.getPassword())) {
-                    LoggedAcc = hW.getName();
+                    LoggedHW = hW.getName();
                     
                     L0LoginPage.setVisible(false);
                     L1Dashboard.setVisible(true);
@@ -998,9 +984,9 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         String prevID = (String) model.getValueAt(model.getRowCount()-1, 0);
-        Child patientToAdd = new Child(Integer.parseInt(String.format("%06d", Integer.parseInt(prevID) +01)),null, null, null, null, null, null, null, LoggedAcc, null, null, null);
+        Child patientToAdd = new Child(Integer.parseInt(String.format("%06d", Integer.parseInt(prevID) +01)),null, null, null, null, null, null, null, LoggedHW, null, null, null);
         ChildList.add(patientToAdd);
-        model.addRow(new Object[]{String.format("%06d", Integer.parseInt(prevID) +01),null, null, null, null, null, null, null, LoggedAcc, null, null, null});
+        model.addRow(new Object[]{String.format("%06d", Integer.parseInt(prevID) +01),null, null, null, null, null, null, null, LoggedHW, null, null, null});
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
