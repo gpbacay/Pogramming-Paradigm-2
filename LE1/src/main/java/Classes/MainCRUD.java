@@ -22,7 +22,7 @@ public class MainCRUD {
     //Database
    private static final String FILEPATHNAME = "C:\\Users\\Gianne Bacay\\Documents\\NetBeansProjects\\LE1\\src\\main\\java\\Databases\\Patients.csv";
    //ArrayList
-   public static ArrayList<Patient> PatientList = new ArrayList<>();
+   public static ArrayList<Child> ChildList = new ArrayList<>();
 
     
 //Populate Database
@@ -43,8 +43,8 @@ public class MainCRUD {
             String NextDoseDate = Line[9];
             String Allergies = Line[10];
             String Reactions = Line[11];
-            Patient patient = new Patient(Integer.parseInt(ID), Name, Address, Age, Sex, VaccineName, VaccineType, DateGiven, AdministeredBy, NextDoseDate, Allergies, Reactions);
-            PatientList.add(patient);
+            Child child = new Child(Integer.parseInt(ID), Name, Address, Age, Sex, VaccineName, VaccineType, DateGiven, AdministeredBy, NextDoseDate, Allergies, Reactions);
+            ChildList.add(child);
          }
       } 
       catch (FileNotFoundException e) {
@@ -54,7 +54,7 @@ public class MainCRUD {
    
    public static void SaveToDatabase() {
       try (PrintWriter writer = new PrintWriter(new FileWriter(FILEPATHNAME))) {
-         for (Patient patient : PatientList) {
+         for (Child patient : ChildList) {
             writer.println(String.format("%06d", patient.getID()) + "," + patient.getName() + "," + patient.getAddress() + "," + patient.getAge() + "," + patient.getSex() + "," +
                     patient.getVaccineName() + "," + patient.getVaccineType() + "," + patient.getVaccineType() + "," + patient.getDateGiven() + patient.getAdministeredBy() + "," +
                     patient.getNextDoseDate() + "," + patient.getAllergies() + "," + patient.getReactions());

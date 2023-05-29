@@ -8,8 +8,7 @@ import Classes.HealthWorker;
 import Classes.HealthWorkerCRUD;
 import static Classes.HealthWorkerCRUD.HealthWorkerList;
 import Classes.MainCRUD;
-import static Classes.MainCRUD.PatientList;
-import Classes.Patient;
+import Classes.Child;
 import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.ImageIcon;
@@ -20,6 +19,7 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import static Classes.MainCRUD.ChildList;
 
 /**
  *
@@ -104,7 +104,7 @@ public class Main extends javax.swing.JFrame {
     public static void PopulateTable() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         //Patient_List into patientTable
-        for (Patient patient : PatientList) {
+        for (Child patient : ChildList) {
             int ID = patient.getID();
             String Name = patient.getName();
             String Address = patient.getAddress();
@@ -125,12 +125,12 @@ public class Main extends javax.swing.JFrame {
     public static void PopulateTable1() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         //Patient_List into patientTable
-        for (Patient patient : PatientList) {
-            int ID = patient.getID();
-            String Name = patient.getName();
-            String Address = patient.getAddress();
-            String Age = patient.getAge();
-            String Sex = patient.getSex();
+        for (Child child : ChildList) {
+            int ID = child.getID();
+            String Name = child.getName();
+            String Address = child.getAddress();
+            String Age = child.getAge();
+            String Sex = child.getSex();
             
             model.addRow(new Object[]{String.format("%06d", ID), Name, Address, Age, Sex});
         }
@@ -907,8 +907,8 @@ public class Main extends javax.swing.JFrame {
                 "Select row",
                 JOptionPane.ERROR_MESSAGE);
         } else {
-            if (row >= 0 && row < PatientList.size()) {
-                PatientList.remove(row);
+            if (row >= 0 && row < ChildList.size()) {
+                ChildList.remove(row);
             } else {}
             DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
             model.removeRow(row);
@@ -998,8 +998,8 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         String prevID = (String) model.getValueAt(model.getRowCount()-1, 0);
-        Patient patientToAdd = new Patient(Integer.parseInt(String.format("%06d", Integer.parseInt(prevID) +01)),null, null, null, null, null, null, null, LoggedAcc, null, null, null);
-        PatientList.add(patientToAdd);
+        Child patientToAdd = new Child(Integer.parseInt(String.format("%06d", Integer.parseInt(prevID) +01)),null, null, null, null, null, null, null, LoggedAcc, null, null, null);
+        ChildList.add(patientToAdd);
         model.addRow(new Object[]{String.format("%06d", Integer.parseInt(prevID) +01),null, null, null, null, null, null, null, LoggedAcc, null, null, null});
     }//GEN-LAST:event_jButton21ActionPerformed
 
