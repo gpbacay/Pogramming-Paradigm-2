@@ -4,8 +4,8 @@
  */
 package Main;
 
-import Classes.CRUD_Account;
-import static Classes.CRUD_Account.Display_Menu;
+import Classes.HealthWorkerCRUD;
+import static Classes.HealthWorkerCRUD.Display_Menu;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,17 +15,17 @@ import javax.swing.JOptionPane;
 public class AccountMain {
        public static void main(String[] args) {
       //Scan database
-      CRUD_Account.Populate_Database();
+      HealthWorkerCRUD.Populate_Database();
       boolean running = true;
       while (running) {
          int choice = Display_Menu();
          switch (choice) {
             case 1 -> //create
-               CRUD_Account.CreateAccount();
+               HealthWorkerCRUD.CreateAccount();
             case 2 -> //open database
-               CRUD_Account.RetrieveAccount();
+               HealthWorkerCRUD.RetrieveAccount();
             case 3 -> //open database
-               CRUD_Account.OpenCSV();
+               HealthWorkerCRUD.OpenCSV();
             case 4 -> {
                 //exit
                 int confirmation = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?", "Confirmation", JOptionPane.YES_NO_OPTION);
